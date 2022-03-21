@@ -1,5 +1,7 @@
 # Flix PHP Framework
 
+* Framework em desenvolvimento
+
 ## Select
 
 Criando um select diretamente
