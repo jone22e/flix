@@ -2,6 +2,41 @@
 
 * Framework em desenvolvimento
 
+## Conexão com banco de dados
+
+````php
+
+````
+
+## Autenticação do usuário
+
+````php
+use Flix\FW\Auth\User;
+
+# Configuração que pode ser gravada em outro arquivo e só importar 
+$conf = [
+    "storage"       => [
+        "name"     => "userId",
+        "settings" => ["encryped"],
+        "table"    => "usuario",
+        "columns"  => ["id", "nome", "email", "administrador as admin"]
+    ],
+    "encryptionkey" => "minha key para criptgrafia",// or false
+    "redirect"      => [
+        "uri" => "/login"
+    ],
+];
+
+# Checagem do usuário
+$user = (new User($db, $conf))->check();
+
+# Resultado
+echo $user->id . '<br>';
+echo $user->nome . '<br>';
+echo $user->email . '<br>';
+echo $user->admin ? 'true' : 'false' . '<br>';
+````
+
 ## Select
 
 Criando um select diretamente
@@ -39,33 +74,4 @@ foreach ($usuarios as $usuario) {
     ]);
 }
 $select->render();
-````
-
-## Autenticação do usuário
-
-````php
-use Flix\FW\Auth\User;
-
-# Configuração que pode ser gravada em outro arquivo e só importar 
-$conf = [
-    "storage"       => [
-        "name"     => "userId",
-        "settings" => ["encryped"],
-        "table"    => "usuario",
-        "columns"  => ["id", "nome", "email", "administrador as admin"]
-    ],
-    "encryptionkey" => "minha key para criptgrafia",//or false
-    "redirect"      => [
-        "uri" => "/login"
-    ],
-];
-
-# Checagem do usuário
-$user = (new User($db, $conf))->check();
-
-# Resultado
-echo $user->id . '<br>';
-echo $user->nome . '<br>';
-echo $user->email . '<br>';
-echo $user->admin ? 'true' : 'false' . '<br>';
 ````
