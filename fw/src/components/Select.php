@@ -1,6 +1,6 @@
 <?php
 
-namespace Flix\Components;
+namespace Flix\FW\Components;
 
 class Select {
 

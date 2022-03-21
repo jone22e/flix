@@ -1,6 +1,6 @@
 <?php
 
-namespace Flix\Database;
+namespace Flix\FW\Database;
 
 class Connection {
 //teste

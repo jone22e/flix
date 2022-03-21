@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Flix\Datasource;
+namespace Flix\FW\Datasource;
 
 
 class Datasource {
