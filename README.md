@@ -9,11 +9,12 @@ Criando um select diretamente
 ````php
 use Flix\FW\Components\Select;
 
-(new Select())->create(['id' => 'mysel'])
-              ->addItem(["id" => "1", "name" => "SIM"])
-              ->addItem(["id" => "0", "name" => "NÃO"])
-              ->addItem(["id" => "2", "name" => "TALVEZ", "selected"=>true])
-              ->render();
+(new Select())
+->create(['id' => 'mysel'])
+->addItem(["id" => "1", "name" => "SIM"])
+->addItem(["id" => "0", "name" => "NÃO"])
+->addItem(["id" => "2", "name" => "TALVEZ", "selected"=>true])
+->render();
 ````
 
 Buscando dados do banco e exibindo no select
