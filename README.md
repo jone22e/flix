@@ -37,7 +37,9 @@ echo $user->email . '<br>';
 echo $user->admin ? 'true' : 'false' . '<br>';
 ````
 
-## Select
+## Componentes Visuais
+
+### Select
 
 Criando um select diretamente
 
