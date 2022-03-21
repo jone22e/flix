@@ -1,11 +1,12 @@
 <?php
 
 
-namespace Flix\FW\Dataset;
+namespace Flix\FW\Database\Dataset;
 
 
 class Dataset {
 
+    private $db;
     private $table;
     private $where;
     private $columns;
@@ -14,9 +15,13 @@ class Dataset {
 
     /**
      * Datasource constructor.
+     * @param $db
      * @param bool $filtrar_excluidos
      */
-    public function __construct(bool $filtrar_excluidos = false) { $this->filtrar_excluidos = $filtrar_excluidos; }
+    public function __construct($db, bool $filtrar_excluidos = false) {
+        $this->db = $db;
+        $this->filtrar_excluidos = $filtrar_excluidos;
+    }
 
 
     public function table($table) {
@@ -66,7 +71,7 @@ class Dataset {
     }
 
     public function first() {
-        global $db;
+        $db = $this->db;
         $this->prepare();
         $res = $db->getResultSet("select {$this->columns} from {$this->table} {$this->where} order by id asc limit 1");
         if ($res!=null) {
@@ -77,7 +82,7 @@ class Dataset {
     }
 
     public function find($id) {
-        global $db;
+        $db = $this->db;
         $this->prepare();
         $res = $db->getResultSet("select {$this->columns} from {$this->table} where id = {$id}");
         if ($res!=null) {
@@ -102,7 +107,7 @@ class Dataset {
     }
 
     public function chunk($n, $ini = 0) {
-        global $db;
+        $db = $this->db;
 
         $this->prepare();
 
@@ -115,7 +120,7 @@ class Dataset {
     }
 
     public function get() {
-        global $db;
+        $db = $this->db;
 
         $this->prepare();
 
