@@ -9,13 +9,14 @@ class Datasource {
     private $table;
     private $where;
     private $columns;
+    private $order;
     private $filtrar_excluidos = false;
 
     /**
      * Datasource constructor.
      * @param bool $filtrar_excluidos
      */
-    public function __construct(bool $filtrar_excluidos) { $this->filtrar_excluidos = $filtrar_excluidos; }
+    public function __construct(bool $filtrar_excluidos = false) { $this->filtrar_excluidos = $filtrar_excluidos; }
 
 
     public function table($table) {
@@ -51,6 +52,15 @@ class Datasource {
             } else {
                 $this->where .= " and {$filters[0]} {$filters[1]} '{$v}' ";
             }
+        }
+        return $this;
+    }
+
+    public function order($order) {
+        if ($this->order == '') {
+            $this->order .= " order by {$order}  ";
+        } else {
+            $this->order .= " ,{$order} ";
         }
         return $this;
     }
@@ -96,7 +106,7 @@ class Datasource {
 
         $this->prepare();
 
-        $lista = $db->listar("select {$this->columns} from {$this->table} {$this->where} order by id asc limit $n offset $ini ");
+        $lista = $db->listar("select {$this->columns} from {$this->table} {$this->where} {$this->order} asc limit $n offset $ini ");
         if (!$db->isEmpty($lista)) {
             return json_decode(json_encode(pg_fetch_all($lista)));
         } else {
@@ -109,7 +119,7 @@ class Datasource {
 
         $this->prepare();
 
-        $lista = $db->listar("select {$this->columns} from {$this->table} {$this->where} order by id asc  ");
+        $lista = $db->listar("select {$this->columns} from {$this->table} {$this->where} {$this->order} ");
         if (!$db->isEmpty($lista)) {
             return json_decode(json_encode(pg_fetch_all($lista)));
         } else {

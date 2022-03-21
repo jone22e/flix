@@ -8,13 +8,19 @@ class Select {
 
     function create($properties) {
         $this->properties = $properties;
+        return $this;
+    }
+    
+    function addItem($iten) {
+        $this->properties['itens'][] = $iten;
+        return $this;
     }
 
     function render() {
         $properties = json_decode(json_encode($this->properties));
 
         $options = "";
-        foreach ($this->properties->itens as $iten) {
+        foreach ($properties->itens as $iten) {
             $selected = $iten->selected?"selected='selected'":"";
             $options .= "<option value='{$iten->id}' {$selected}>{$iten->name}</option>";
         }
