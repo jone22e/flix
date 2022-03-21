@@ -54,7 +54,7 @@ $conf = [
         "table"    => "usuario",
         "columns"  => ["id", "nome", "email", "administrador as admin"]
     ],
-    "encryptionkey" => "mykey for crypt",//or false
+    "encryptionkey" => "minha key para criptgrafia",//or false
     "redirect"      => [
         "uri" => "/login"
     ],
