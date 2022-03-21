@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Flix\FW\Datasource;
+namespace Flix\FW\Dataset;
 
 
-class Datasource {
+class Dataset {
 
     private $table;
     private $where;
