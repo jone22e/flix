@@ -20,7 +20,7 @@ use Flix\FW\Components\Select;
 Buscando dados do banco e exibindo no select
 
 ````php
-use Flix\FW\Dataset\Dataset;
+use Flix\FW\Database\Dataset\Dataset;
 use Flix\FW\Components\Select;
 
 $ds = new Dataset();
