@@ -5,7 +5,61 @@
 ## Conexão com banco de dados
 
 ````php
+use Flix\FW\Database\Datasource\Postgres;
 
+$db = new Postgres(['host'=>'localhost', 'database'=>'mydatabase', 'password'=>'']);
+````
+## Dataset
+
+````php
+use Flix\FW\Database\Dataset\Dataset;
+
+$ds = new Dataset($db);
+
+# Buscar um usuário
+$user = $ds->table('usuario')->find($id);
+
+echo $user->nome;
+
+# Listar usuários
+$users = $ds->table('usuario')->get();
+foreach ($users as $user) {
+    echo $user->nome.'<br>';
+}
+
+# Listar usuários com filtro
+$users = $ds->table('usuario')
+            ->where('excluido',0)
+            ->where('inativo',0)
+            ->order('id asc')
+            ->order('nome asc')
+            ->get();
+foreach ($users as $user) {
+    echo $user->nome.'<br>';
+}
+
+# Inserir
+$ds->table('usuario')->insert([
+   'nome' => 'Novo usuario'
+]);
+
+# Inserir e pegar o último inserido
+$id = $ds->table('usuario')->insertGetId([
+   'nome' => 'Novo usuario'
+]);
+
+# Atualizar
+$ds->table('usuario')->where('id', 1)
+                     ->update(['nome' => 'Novo nome']);
+
+# Marcar excluido
+$ds->table('usuario')->where('id', 1)->delete();
+
+# Forçar delete
+$ds->table('usuario')->where('id', 1)->delete(false);
+
+# Delete sem where unlocker
+$ds->table('usuario')->delete(false, true);
 ````
 
 ## Autenticação do usuário

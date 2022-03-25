@@ -132,4 +132,71 @@ class Dataset {
         }
     }
 
+    public function sql($sql) {
+        $db = $this->db;
+        $lista = $db->listar($sql);
+        if (!$db->isEmpty($lista)) {
+            return json_decode(json_encode(pg_fetch_all($lista)));
+        } else {
+            return null;
+        }
+    }
+
+    public function insert($array=[]) {
+        $db = $this->db;
+
+        $cols = [];
+        $vals = [];
+        foreach ($array as $col=>$val) {
+            $cols[] = $col;
+            if ($val!=null) {
+                $vals[] = "'" . $val . "'";
+            } else {
+                $vals[] = "null";
+            }
+        }
+
+        $cols = implode(',', $cols);
+        $vals = implode(',', $vals);
+
+        $db->sql_insert("insert into {$this->table} ($cols) values ($vals)");
+        return true;
+    }
+
+    public function insertGetId($array=[]) {
+        $db = $this->db;
+        $this->insert($array);
+        return $db->getUltimoId($this->table);
+    }
+
+    public function update($array=[], $forceWithoutWhere = false) {
+        $db = $this->db;
+        if ($this->where=='' && !$forceWithoutWhere) {
+            return false;
+        }
+
+        $colsMount = [];
+        foreach ($array as $col=>$val) {
+            $colsMount[] = "$col = '{$val}'";
+        }
+
+        $colsMount = implode(',', $colsMount);
+
+        $db->sql_insert("update {$this->table} set $colsMount {$this->where}");
+        return true;
+    }
+
+    public function delete($justMark = true, $forceWithoutWhere = false) {
+        $db = $this->db;
+        if ($this->where=='' && !$forceWithoutWhere) {
+            return false;
+        }
+
+        if ($justMark) {
+            $db->sql_insert("update {$this->table} set excluido = 0 {$this->where}");
+        } else {
+            $db->sql_insert("delete from {$this->table} {$this->where}");
+        }
+    }
+
 }
