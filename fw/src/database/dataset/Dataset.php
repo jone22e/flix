@@ -187,6 +187,7 @@ class Dataset {
     }
 
     public function delete($justMark = true, $forceWithoutWhere = false) {
+        //delete
         $db = $this->db;
         if ($this->where=='' && !$forceWithoutWhere) {
             return false;
