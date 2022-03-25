@@ -9,6 +9,7 @@ class Dataset {
     private $db;
     private $table;
     private $where;
+    private $inner;
     private $columns;
     private $order;
     private $filtrar_excluidos = false;
@@ -61,6 +62,68 @@ class Dataset {
         return $this;
     }
 
+    public function join($table, $filter = []) {
+        foreach ($filter as $filters) {
+            $ct = count($filters);
+            $on_where = "";
+            if ($ct==2) {
+                $v = $filters[1];
+                if (is_bool($v)) {
+                    $v = $v?1:0;
+                }
+                if ($on_where == '') {
+                    $on_where .= " on {$filters[0]} = {$v} ";
+                } else {
+                    $on_where .= " and {$filters[0]} = {$v} ";
+                }
+            } else if ($ct==3) {
+                $v = $filters[2];
+                if (is_bool($v)) {
+                    $v = $v?1:0;
+                }
+                if ($on_where == '') {
+                    $on_where .= " on {$filters[0]} {$filters[1]} {$v} ";
+                } else {
+                    $on_where .= " and {$filters[0]} {$filters[1]} {$v} ";
+                }
+            }
+        }
+        $this->inner .= " inner join {$table} {$on_where} ";
+
+        return $this;
+    }
+
+    public function leftJoin($table, $filter = []) {
+        foreach ($filter as $filters) {
+            $ct = count($filters);
+            $on_where = "";
+            if ($ct==2) {
+                $v = $filters[1];
+                if (is_bool($v)) {
+                    $v = $v?1:0;
+                }
+                if ($on_where == '') {
+                    $on_where .= " on {$filters[0]} = {$v} ";
+                } else {
+                    $on_where .= " and {$filters[0]} = {$v} ";
+                }
+            } else if ($ct==3) {
+                $v = $filters[2];
+                if (is_bool($v)) {
+                    $v = $v?1:0;
+                }
+                if ($on_where == '') {
+                    $on_where .= " on {$filters[0]} {$filters[1]} {$v} ";
+                } else {
+                    $on_where .= " and {$filters[0]} {$filters[1]} {$v} ";
+                }
+            }
+        }
+        $this->inner .= " left join {$table} {$on_where} ";
+
+        return $this;
+    }
+
     public function order($order) {
         if ($this->order == '') {
             $this->order .= " order by {$order}  ";
@@ -73,7 +136,7 @@ class Dataset {
     public function first() {
         $db = $this->db;
         $this->prepare();
-        $res = $db->getResultSet("select {$this->columns} from {$this->table} {$this->where} order by id asc limit 1");
+        $res = $db->getResultSet("select {$this->columns} from {$this->table} {$this->inner} {$this->where} order by id asc limit 1");
         if ($res!=null) {
             return json_decode(json_encode($res));
         } else {
@@ -84,7 +147,7 @@ class Dataset {
     public function find($id) {
         $db = $this->db;
         $this->prepare();
-        $res = $db->getResultSet("select {$this->columns} from {$this->table} where id = {$id}");
+        $res = $db->getResultSet("select {$this->columns} from {$this->table} {$this->inner} where id = {$id}");
         if ($res!=null) {
             return json_decode(json_encode($res));
         } else {
@@ -111,7 +174,7 @@ class Dataset {
 
         $this->prepare();
 
-        $lista = $db->listar("select {$this->columns} from {$this->table} {$this->where} {$this->order} asc limit $n offset $ini ");
+        $lista = $db->listar("select {$this->columns} from {$this->table} {$this->inner} {$this->where} {$this->order} asc limit $n offset $ini ");
         if (!$db->isEmpty($lista)) {
             return json_decode(json_encode(pg_fetch_all($lista)));
         } else {
@@ -124,7 +187,7 @@ class Dataset {
 
         $this->prepare();
 
-        $lista = $db->listar("select {$this->columns} from {$this->table} {$this->where} {$this->order} ");
+        $lista = $db->listar("select {$this->columns} from {$this->table} {$this->inner} {$this->where} {$this->order} ");
         if (!$db->isEmpty($lista)) {
             return json_decode(json_encode(pg_fetch_all($lista)));
         } else {
