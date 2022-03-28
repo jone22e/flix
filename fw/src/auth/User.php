@@ -53,6 +53,25 @@ class User {
             exit();
         }
 
+        //anexar permissões do usuário
+
+        $usrd = json_decode(json_encode($usr), true);
+        $permsResult = [];
+        foreach ($this->params->permissions->columns as $column) {
+            if (isset($usrd[$column])) {
+                if ($usrd[$column] != null) {
+                    $permissoes = json_decode($usrd[$column]);
+                    $perms = [];
+                    foreach ($permissoes as $permissoe) {
+                        $perms[$permissoe->name] = array_merge(json_decode(json_encode($permissoe->permissoes), true), json_decode(json_encode($permissoe->options), true));
+                    }
+                    $permsResult = array_merge($permsResult, $perms);
+                }
+            }
+        }
+
+        $usr->permissions = json_decode(json_encode($permsResult));
+
         return $usr;
     }
 

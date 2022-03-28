@@ -50,6 +50,18 @@ class Page {
         HTML;
     }
 
+    public function noPermission() {
+        $this->body = <<<HTML
+            <div class="p-3">
+                <div class="alert alert-warning">
+                    Você não tem permissão para acessar essa ferramenta.
+                </div>
+            </div>
+        HTML;
+        $this->Render();
+        die();
+    }
+
     public function generateMenu()
     {
         global $user;
@@ -58,25 +70,37 @@ class Page {
         if (is_object($menus)) {
             foreach ($menus as $menu => $item) {
                 if (is_object($item)) {
-
                     $subparts = [];
-                    foreach ($item as $sub => $url) {
-                        $subparts[] = "<a class='dropdown-item' href='{$url}'>{$sub}</a>";
+                    $submenuscounter = 0;
+                    foreach ($item as $keysub=>$submenu) {
+                        if($submenuscounter % 2 == 0) {
+                            if ($submenuscounter!=0)
+                                $subparts[] = "</div>";
+                            $subparts[] = "<div class=' w-100' style='border-right: 1px solid #e9ecef;'>";
+                        } else {
+                            $subparts[] = "<div class='dropdown-divider'></div>";
+                        }
+                        $subparts[] = "<h6 class='dropdown-header'>{$keysub}</h6>";
+                        foreach ($submenu as $sub => $url) {
+                            $subparts[] = "<a class='dropdown-item'  style='min-width: 220px' href='{$url}'>{$sub}</a>";
+                        }
+                        $submenuscounter++;
                     }
-
                     $subparts = implode("\n", $subparts);
                     $parts[] = "<li class='nav-item dropdown'>
                                 <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                                     {$menu}
                                 </a>
-                                <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-                                  {$subparts}
+                                <div class='dropdown-menu' style='width: auto' aria-labelledby='navbarDropdown'>
+                                  <div class='d-lg-flex'>
+                                      {$subparts}
+                                  </div>
                                 </div>
                             </li>";
                 } else {
                     $parts[] = "<li class='nav-item'>
-                                <a class='nav-link' href='{$item}'>{$menu}</a>
-                            </li>";
+                                    <a class='nav-link' href='{$item}'>{$menu}</a>
+                                </li>";
                 }
 
             }
@@ -95,6 +119,15 @@ class Page {
                       {$parts}
                     </ul>
                     <ul class='navbar-nav ml-auto'>
+                    
+                        <li class='nav-item avatar dropdown mr-2 lang-select-box' style=' padding-top: 5px'>
+                            <select name='LANG' id='LANG' class='form-control form-control-sm   bg-dark border-0 rounded-0 text-white'>
+                                <option value='BR' title='BR'>BR</option>
+                                <option value='EN' title='EN'>EN</option>
+                                <option value='CN' title='CN'>CN</option>
+                            </select>
+                        </li>
+                        
                         <li class='nav-item dropdown'>
                             <a class='nav-link' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                                 <i class='fa fa-user-circle'></i>
