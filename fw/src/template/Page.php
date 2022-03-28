@@ -2,6 +2,8 @@
 
 namespace Flix\Fw\Template;
 
+use Flix\FW\Types\Strings;
+
 class Page {
 
     private $appName = "";
@@ -87,11 +89,18 @@ class Page {
                         $submenuscounter++;
                     }
                     $subparts = implode("\n", $subparts);
+
+                    $toggler = "dropdown-toggle";
+                    $dropRig = "";
+                    if ((new Strings($menu))->startsWith("<")) {
+                        $toggler = '';
+                        $dropRig = 'dropdown-menu-right';
+                    }
                     $parts[] = "<li class='nav-item dropdown'>
-                                <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                                <a class='nav-link {$toggler}' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                                     {$menu}
                                 </a>
-                                <div class='dropdown-menu' style='width: auto' aria-labelledby='navbarDropdown'>
+                                <div class='dropdown-menu {$dropRig}' style='width: auto' aria-labelledby='navbarDropdown'>
                                   <div class='d-lg-flex'>
                                       {$subparts}
                                   </div>
