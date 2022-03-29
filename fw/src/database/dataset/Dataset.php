@@ -190,7 +190,7 @@ class Dataset {
 
         $this->prepare();
 
-        $lista = $db->listar("select {$this->columns} from {$this->table} {$this->inner} {$this->where} {$this->order} asc limit $n offset $ini ");
+        $lista = $db->listar("select {$this->columns} from {$this->table} {$this->inner} {$this->where} {$this->order} limit $n offset $ini ");
         if (!$db->isEmpty($lista)) {
             return json_decode(json_encode(pg_fetch_all($lista)));
         } else {
