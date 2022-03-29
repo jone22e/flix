@@ -38,7 +38,13 @@ class Dataset {
 
     public function where(...$filters) {
         $ct = count($filters);
-        if ($ct==2) {
+        if ($ct==1) {
+            if ($this->where == '') {
+                $this->where .= " where {$filters[0]} ";
+            } else {
+                $this->where .= " and {$filters[0]} ";
+            }
+        } else if ($ct==2) {
             $v = $filters[1];
             if (is_bool($v)) {
                 $v = $v?1:0;
@@ -273,7 +279,7 @@ class Dataset {
         }
 
         if ($justMark) {
-            $db->sql_insert("update {$this->table} set excluido = 0 {$this->where}");
+            $db->sql_insert("update {$this->table} set excluido = 1 {$this->where}");
         } else {
             $db->sql_insert("delete from {$this->table} {$this->where}");
         }
