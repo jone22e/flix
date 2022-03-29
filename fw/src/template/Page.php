@@ -46,6 +46,11 @@ class Page {
                 <body>
                     {$this->generateMenu()}
                     {$this->body}
+                    <div class='modal fade' data-keyboard='false' id='modal' tabindex='-1' role='dialog'>
+                        <div class='modal-dialog modal-lg' role='document'>
+                            <div class='modal-content' id='modaldiv'></div>
+                        </div>
+                    </div>
                     {$js}
                 </body>
             </html>
@@ -61,6 +66,17 @@ class Page {
             </div>
         HTML;
         $this->Render();
+        die();
+    }
+
+    public function noPermissionDialog() {
+        echo <<<HTML
+            <div class="p-3">
+                <div class="alert alert-warning mb-0">
+                    Você não tem permissão para acessar essa ferramenta.
+                </div>
+            </div>
+        HTML;
         die();
     }
 
