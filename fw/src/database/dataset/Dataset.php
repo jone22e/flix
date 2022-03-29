@@ -44,9 +44,17 @@ class Dataset {
                 $v = $v?1:0;
             }
             if ($this->where == '') {
-                $this->where .= " where {$filters[0]} = '{$v}' ";
+                if ($v==null) {
+                    $this->where .= " where {$filters[0]} = null ";
+                } else {
+                    $this->where .= " where {$filters[0]} = '{$v}' ";
+                }
             } else {
-                $this->where .= " and {$filters[0]} = '{$v}' ";
+                if ($v==null) {
+                    $this->where .= " and {$filters[0]} = null ";
+                } else {
+                    $this->where .= " and {$filters[0]} = '{$v}' ";
+                }
             }
         } else if ($ct==3) {
             $v = $filters[2];
@@ -54,9 +62,17 @@ class Dataset {
                 $v = $v?1:0;
             }
             if ($this->where == '') {
-                $this->where .= " where {$filters[0]} {$filters[1]} '{$v}' ";
+                if ($v==null) {
+                    $this->where .= " where {$filters[0]} {$filters[1]} null ";
+                } else {
+                    $this->where .= " where {$filters[0]} {$filters[1]} '{$v}' ";
+                }
             } else {
-                $this->where .= " and {$filters[0]} {$filters[1]} '{$v}' ";
+                if ($v==null) {
+                    $this->where .= " and {$filters[0]} {$filters[1]} null ";
+                } else {
+                    $this->where .= " and {$filters[0]} {$filters[1]} '{$v}' ";
+                }
             }
         }
         return $this;
