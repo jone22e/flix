@@ -131,6 +131,12 @@ class Page {
             }
         }
 
+        $parts[] = "<li class='nav-item'>
+                        <a class='nav-link' href='javascript:void(0)'><i class='fas fa-comment-alt'></i></a>
+                    </li>";
+
+
+
         $parts = implode("\n", $parts);
 
         $menu = "
