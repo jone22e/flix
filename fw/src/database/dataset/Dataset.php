@@ -44,13 +44,13 @@ class Dataset {
                 $v = $v?1:0;
             }
             if ($this->where == '') {
-                if ($v==null) {
+                if ($v!='0' && $v=='null') {
                     $this->where .= " where {$filters[0]} = null ";
                 } else {
                     $this->where .= " where {$filters[0]} = '{$v}' ";
                 }
             } else {
-                if ($v==null) {
+                if ($v!='0' && $v=='null') {
                     $this->where .= " and {$filters[0]} = null ";
                 } else {
                     $this->where .= " and {$filters[0]} = '{$v}' ";
@@ -62,13 +62,13 @@ class Dataset {
                 $v = $v?1:0;
             }
             if ($this->where == '') {
-                if ($v==null) {
+                if ($v!='0' && $v=='null') {
                     $this->where .= " where {$filters[0]} {$filters[1]} null ";
                 } else {
                     $this->where .= " where {$filters[0]} {$filters[1]} '{$v}' ";
                 }
             } else {
-                if ($v==null) {
+                if ($v!='0' && $v=='null') {
                     $this->where .= " and {$filters[0]} {$filters[1]} null ";
                 } else {
                     $this->where .= " and {$filters[0]} {$filters[1]} '{$v}' ";
