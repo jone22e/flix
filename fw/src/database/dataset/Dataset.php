@@ -262,11 +262,20 @@ class Dataset {
 
         $colsMount = [];
         foreach ($array as $col=>$val) {
-            $colsMount[] = "$col = '{$val}'";
+            if (is_array($val)) {
+                if ($val['format']=='text') {
+                    $colsMount[] = "$col = $${$val['value']}$$";
+                } else {
+                    $colsMount[] = "$col = '{$val['value']}'";
+                }
+            } else {
+                $colsMount[] = "$col = '{$val}'";
+            }
         }
 
         $colsMount = implode(',', $colsMount);
 
+        error_log("update {$this->table} set $colsMount {$this->where}");
         $db->sql_insert("update {$this->table} set $colsMount {$this->where}");
         return true;
     }
