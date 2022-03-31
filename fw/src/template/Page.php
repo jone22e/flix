@@ -12,6 +12,7 @@ class Page {
     private $jsFiles = [];
     private $body;
     private $mainmenu;
+    private $complementos = [];
 
     public function Render()
     {
@@ -83,6 +84,10 @@ class Page {
         die();
     }
 
+    public function addComplementMenu($comp) {
+        $this->complementos[] = $comp;
+    }
+
     public function generateMenu()
     {
         global $user;
@@ -111,6 +116,11 @@ class Page {
 
                     $toggler = "dropdown-toggle";
                     $dropRig = "";
+
+                    if ($menu=='Apps') {
+                        $menu = "<svg width='24' height='24' style='margin-top: -4px' viewBox='0 0 24 24' focusable='false' role='presentation'><path fill='currentColor' fill-rule='evenodd' d='M4 5.01C4 4.451 4.443 4 5.01 4h1.98C7.549 4 8 4.443 8 5.01v1.98C8 7.549 7.557 8 6.99 8H5.01C4.451 8 4 7.557 4 6.99V5.01zm0 6c0-.558.443-1.01 1.01-1.01h1.98c.558 0 1.01.443 1.01 1.01v1.98C8 13.549 7.557 14 6.99 14H5.01C4.451 14 4 13.557 4 12.99v-1.98zm6-6c0-.558.443-1.01 1.01-1.01h1.98c.558 0 1.01.443 1.01 1.01v1.98C14 7.549 13.557 8 12.99 8h-1.98C10.451 8 10 7.557 10 6.99V5.01zm0 6c0-.558.443-1.01 1.01-1.01h1.98c.558 0 1.01.443 1.01 1.01v1.98c0 .558-.443 1.01-1.01 1.01h-1.98c-.558 0-1.01-.443-1.01-1.01v-1.98zm6-6c0-.558.443-1.01 1.01-1.01h1.98c.558 0 1.01.443 1.01 1.01v1.98C20 7.549 19.557 8 18.99 8h-1.98C16.451 8 16 7.557 16 6.99V5.01zm0 6c0-.558.443-1.01 1.01-1.01h1.98c.558 0 1.01.443 1.01 1.01v1.98c0 .558-.443 1.01-1.01 1.01h-1.98c-.558 0-1.01-.443-1.01-1.01v-1.98zm-12 6c0-.558.443-1.01 1.01-1.01h1.98c.558 0 1.01.443 1.01 1.01v1.98C8 19.549 7.557 20 6.99 20H5.01C4.451 20 4 19.557 4 18.99v-1.98zm6 0c0-.558.443-1.01 1.01-1.01h1.98c.558 0 1.01.443 1.01 1.01v1.98c0 .558-.443 1.01-1.01 1.01h-1.98c-.558 0-1.01-.443-1.01-1.01v-1.98zm6 0c0-.558.443-1.01 1.01-1.01h1.98c.558 0 1.01.443 1.01 1.01v1.98c0 .558-.443 1.01-1.01 1.01h-1.98c-.558 0-1.01-.443-1.01-1.01v-1.98z'></path></svg>";
+                    }
+
                     if ((new Strings($menu))->startsWith("<")) {
                         $toggler = '';
                         $dropRig = 'dropdown-menu-right';
@@ -125,6 +135,8 @@ class Page {
                                   </div>
                                 </div>
                             </li>";
+
+
                 } else {
                     $parts[] = "<li class='nav-item'>
                                     <a class='nav-link' href='{$item}'>{$menu}</a>
@@ -151,13 +163,16 @@ class Page {
 
         $menu = "
             <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+            
+                 
+                
                 <a class='navbar-brand' href='#'>{$this->appName}</a>
                 <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
                     <span class='navbar-toggler-icon'></span>
                 </button>
                 <div class='collapse navbar-collapse' id='navbarSupportedContent'>
                     <ul class='navbar-nav mr-auto'>
-                      {$parts}
+                       {$parts}
                     </ul>
                     <ul class='navbar-nav ml-auto'>
                     
