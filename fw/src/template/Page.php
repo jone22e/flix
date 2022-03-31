@@ -219,7 +219,7 @@ class Page {
                     <ul class='navbar-nav ml-auto'>
                     
                         <li class='nav-item avatar dropdown mr-2 lang-select-box' style=' padding-top: 5px'>
-                            <select name='LANG' id='LANG' class='form-control form-control-sm   bg-dark border-0 rounded-0 text-white'>
+                            <select name='LANG' id='LANG' class='form-control form-control-sm bg-dark border-0 rounded-0 text-white'>
                                 <option value='BR' title='BR'>BR</option>
                                 <option value='EN' title='EN'>EN</option>
                                 <option value='CN' title='CN'>CN</option>
