@@ -115,10 +115,7 @@ class Page {
                             if ($menu=='Apps') {
 
                                 if ($sub=='Tickets') {
-
-
                                     $notificacao = (new \App\Brasiltec\Controller\TicketController())->getCount($user->id);
-
                                     $alertItem = "<div class='position-relative'>
                                             <div style='position: absolute; background: red; width: 16px; height: 16px; font-size: 10px; left: -18px; color: white; top: -19px;' class='rounded-circle d-flex'>
                                                 <div class='m-auto'>{$notificacao}</div>
