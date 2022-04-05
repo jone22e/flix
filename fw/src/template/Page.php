@@ -54,7 +54,9 @@ class Page {
                     </div>
                     {$js}
                     <script>
-                        chatrun.newmodeActive();
+                        if (typeof chatrun !== 'undefined' ) {
+                            chatrun.newmodeActive();
+                        }
                     </script>
                 </body>
             </html>
