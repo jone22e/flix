@@ -237,6 +237,7 @@ class Page {
                             </a>
                             <div class='dropdown-menu dropdown-menu-right' aria-labelledby='navbarDropdown'>
                                 <a class='dropdown-item' href='javascript:void(0)'>{$user->nome}</a>
+                                <a class='dropdown-item' href='/preferencias'>Preferências</a>
                                 <a class='dropdown-item' href='/logout'>Saír do sistema</a>
                             </div>
                         </li>
