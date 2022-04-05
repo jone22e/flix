@@ -188,16 +188,19 @@ class Page {
             }
         }
 
-        $parts[] = "<li class='nav-item'>
-                        <a class='nav-link' href='javascript:void(0)' onclick='$(\".chatbox-toggle\").click()'>
-                            <i class='fas fa-comment-alt'></i>
-                            <div class='position-relative'>
-                                <div style='position: absolute; background: red; width: 16px; height: 16px; font-size: 10px; left: 8px; color: white; top: -27px;' class='rounded-circle d-flex'>
-                                    <div class='m-auto chat-total-notificacoes'>0</div>
+
+        if (!isset($user->preferencias->desabilitar_chat) || ($user->preferencias->desabilitar_chat==0)) {
+            $parts[] = "<li class='nav-item'>
+                            <a class='nav-link' href='javascript:void(0)' onclick='$(\".chatbox-toggle\").click()'>
+                                <i class='fas fa-comment-alt'></i>
+                                <div class='position-relative'>
+                                    <div style='position: absolute; background: red; width: 16px; height: 16px; font-size: 10px; left: 8px; color: white; top: -27px;' class='rounded-circle d-flex'>
+                                        <div class='m-auto chat-total-notificacoes'>0</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>";
+                            </a>
+                        </li>";
+        }
 
 
 

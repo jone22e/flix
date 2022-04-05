@@ -70,6 +70,10 @@ class User {
             }
         }
 
+        if (isset($usr->preferencias)) {
+            $usr->preferencias = json_decode($usr->preferencias);
+        }
+
         $usr->permissions = json_decode(json_encode($permsResult));
 
         return $usr;
