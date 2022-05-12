@@ -204,6 +204,12 @@ class Page {
                         </li>";
         }
 
+        $parts[] = "<li class='nav-item'>
+                        <a  class='nav-link btn-whatsapp-run' href='javascript:void(0)'>
+                            <i class='fab fa-whatsapp'></i>
+                        </a>
+                    </li>";
+
 
 
         $parts = implode("\n", $parts);
