@@ -47,7 +47,7 @@ class Page2 {
                 </head>
                 <body>
                     {$this->generateMenu()}
-                    <div class=' left-side-data main-v2-area border-right' style='display: none'>
+                    <div class=' left-side-data main-v2-area border-right' id="notificacoes_list" style='display: none'>
                       
                     </div>
                     <div class=' left-side-data manu-menu-page-2-favoritos' style='display: none'>
