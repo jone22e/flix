@@ -262,6 +262,13 @@ class Page2 {
                         </div>
                     </div>";
 
+        if (in_array($user->id, [1, 2, 12])) {
+            $parts[] = "<a href='/analyticsv2' class='text-white'><div class='menu-item-page2' >
+                            <div class='m-auto '>
+                                <i class='fal fa-chart-area'></i>
+                            </div>
+                        </div></a>";
+        }
 
         $parts = implode("\n", $parts);
 
