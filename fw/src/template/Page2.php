@@ -17,6 +17,7 @@ class Page2 {
 
     public function Render()
     {
+        global $user;
         $css = [];
         $js = [];
         if (count($this->cssFiles) > 0) {
@@ -71,6 +72,7 @@ class Page2 {
                         if (typeof chatrun !== 'undefined' ) {
                             chatrun.newmodeActive();
                         }
+                        menuv2().waitservice().init('{$user->id}');
                     </script>
                 </body>
             </html>
