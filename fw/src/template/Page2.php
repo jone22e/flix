@@ -70,7 +70,7 @@ class Page2 {
                     <div id="root" class="new-messagens-container"></div>
                     <div class="sending shadow" style="display:none;">Enviado...</div>
                     {$js}
-                    
+                    <div style="display:none;"><input type="hidden" id="LANG" name="LANG" value="BR"></div>
                     <script>
                         if (typeof chatrun !== 'undefined' ) {
                             chatrun.newmodeActive();
