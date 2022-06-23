@@ -230,7 +230,7 @@ class Page2 {
                         <div class='menu-item-page2 '>
                             <div class='m-auto '>
                                 <i class='fal fa-envelope'></i>
-                                <div class='position-relative email-total-notificacao-div'>
+                                <div class='position-relative email-total-notificacao-div' style='display: none'>
                                     <div style='position: absolute; background: red; width: 16px; height: 16px; font-size: 10px; left: 8px; color: white; top: -27px;' class='rounded-circle d-flex'>
                                         <div class='m-auto email-total-notificacao-count'>0</div>
                                     </div>
