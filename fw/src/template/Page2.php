@@ -67,7 +67,10 @@ class Page2 {
                             <div class='modal-content' id='modaldiv'></div>
                         </div>
                     </div>
+                    <div id="root" class="new-messagens-container"></div>
+                    <div class="sending shadow" style="display:none;">Enviado...</div>
                     {$js}
+                    
                     <script>
                         if (typeof chatrun !== 'undefined' ) {
                             chatrun.newmodeActive();
