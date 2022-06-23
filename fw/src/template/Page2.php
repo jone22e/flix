@@ -228,8 +228,7 @@ class Page2 {
                         </div>                        
                     </div>";
 
-        $parts[] = "<a href='/email' class='text-white' target='_blank'>
-                        <div class='menu-item-page2 menuv2-email'>
+        $parts[] = "<div class='menu-item-page2 menuv2-email'>
                             <div class='m-auto '>
                                 <i class='fal fa-envelope'></i>
                                 <div class='position-relative email-total-notificacao-div' style='display: none'>
@@ -239,8 +238,7 @@ class Page2 {
                                 </div>
                                 
                             </div>
-                        </div>
-                    </a>";
+                        </div>";
 
 
 
