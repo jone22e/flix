@@ -262,6 +262,12 @@ class Page2 {
         $parts[] = "<div class='menu-item-page2 btn-notificacoes-menuv2 '>
                         <div class='m-auto '>
                             <i class='fal fa-bell'></i>
+                            
+                            <div class='position-relative notify-total-notificacao-div' style='display: none'>
+                                <div style='position: absolute; background: red; width: 16px; height: 16px; font-size: 10px; left: 8px; color: white; top: -27px;' class='rounded-circle d-flex'>
+                                    <div class='m-auto notify-total-notificacao-count'>0</div>
+                                </div>
+                            </div>
                         </div>
                     </div>";
 
